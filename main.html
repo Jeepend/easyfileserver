@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{path}}</title>
+    <style>
+        a.up {
+            background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABvUlEQVRoQ+2Y4VEDIRBGv6vAdKBWYDowVqBWYCwhHWgHdqBWoCVoB5agFagV6HxOyCCzHHAQbpnh/nO8xy6wy4DGv6FxfuQKLAB8zbkIOQL3ANZb+A2AuzlEpgrY8Ib7GMB7bYkpAhI8uc8AvGgX8MF/ADiqDc/5UiLgg/8GsALwpllAJXxsBNTCxwiohg8JqIcfE2gC3ifQDLwk0BS8K9AcvC1wAeDJcxGxvqlV45hShJfia0yla25iDjyd4yYNzEmu27Eaywj8KIS3kZ4BXEsRMQJMkUPlEkwrSvyruYwADc+VCxCP3R/7jl0XaARYCtPsQJB4BPBQUY5tKg+VK8+c3BfsPf4+u5xme8ijVPoYupoSZOCiMjNOBKAdj9sPaJMgu5Te3LNMJbGh0SbBlGJ6u4fMJeV8HZk2CYmHe3M91lJqkmAUPp29wJt6FeqJNUnw6HRPySEkQGktElK5EyWgRSJLQINEtkBIYt9Pi0UExiT2/bRYTECSqPG0WFSAEkvref0mpnvKLAiLC2TyJA/vAslLVnhAj0DhBU3+XY9A8pIVHtAjUHhBk3/XI5C8ZDUGxHRkNTgmz9G8wC8lF3AxzV5DqQAAAABJRU5ErkJggg==") left top no-repeat;
+            background-size:20px 20px;
+        }
+        a.file {
+            background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABJElEQVRoQ+2a0Q2CQBBEhw4sxRK0ErUDO1Ar0RIsQTuwBEuwBLPJ+YOckLnBW8heYkKiu9k3jyMEbDDx1Ux8fswa4AjgMJKhF4AdgGtp/18GxgT4zG0QlxKI2gA2exHEvwHuAJ4ANq3UaYgaAKt02kggagGYADv3iyFqAkggagMYRNfVbvCe8ABgEFsA59bGNrBT3yXWC0AOwvaJ2cguTwAUhDeAHMQawK1Lg0eALgg3AHYT9+jbmOn7JYBFOnYDMHD2r58FAJucqi4MqJJk+4QBNjlVXRhQJcn2CQNscqq6MKBKku0TBtjkVHVhQJUk2ycMsMmp6sKAKkm2Txhgk1PVhQFVkmyfMMAmp6qjDNhLB/t4WPvcM9VZ/9XAQ/K9M0zewBv8QWsxH3YlTwAAAABJRU5ErkJggg==") left top no-repeat;
+            background-size:20px 20px;
+        }
+        a.dir {
+            background : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABDklEQVRoQ+2ZUQ3CQBBEXxWAA5CABHCABFBEcAAOcAASkAAOigLIkjThl91JNnfZ/vRr5nbmpbnmbqDxZ2h8fipANsEuCCyBAzD/o80R2AP2Tn2MwBVYO6a4A5vsEBbg7Rh+kqSHiAawIKkhFAGmEJcASY/0AZxVATwDKDTH1gOMrQf4/krcFCyzPLrYibPKk6zbxTcQ2YklLUZMikCkPYW2CChajHgUgUh7Cm0RULQY8SgCkfYU2iKgaDHiUQQi7Sm0RUDRYsSjCETaU2iLgKLFiEcXBOyUdxFpIVH7NAJb4ATMEgfxLP0Cdr9Hi6s/78k8i6o0djdnFyt1T6xq1O1Tp9Pu6kTCIiAq0m3zARayMog2hc0rAAAAAElFTkSuQmCC") left top no-repeat;
+            background-size:20px 20px;
+        }
+        a.icon {
+            -moz-padding-start: 1.5em;
+            -webkit-padding-start: 1.5em;
+            text-decoration: none;
+        }
+        a.icon:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            cursor: pointer;
+        }
+        td.detailsColumn {
+            -moz-padding-start: 2em;
+            -webkit-padding-start: 2em;
+            text-align: end;
+            white-space: nowrap;
+        }
+    </style>
+    <link rel="shortcut  icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAC1klEQVRoQ+2Yj5ENQRDGv4vAiQARHBEgAkTgRIAIEAEi4CJABIjgiAARIALqp3Ze9fXrnZm3s7P7Tr2uurp6u7PT/fXX/2aOdMnl6JLbrwOAtRn87xh4trZHR/R/lvQpeucZ+LOnAF5Iet4C4PXggVNJ91YA2QTgqaRXxuj3K4BoAnDXxR9ULp0rTQA8A28lPVw4jJoA/BpCiCpADvC3tDQBWNrYSF81gLBU7QEC2K/qA3tg624mHEaJ3fw1efXejhI/JH13sG5KuuKeVSdxNAv9lvRkUHRnhib2dSjLdHRKdCTXJd0f9F6T1ATgkSSaV5KpjQzDcURYTTLBlfqOtWGzvGYanWOUOAsaIB6+LYmQsfJFEuv5X5QaAJ6+dwO9xc2HBZ5BPMosRZjkhNxgjCHURqUGAB9DHxviLTxXKxb8saSPgcdLe6EbIGG+1AIoKYneU/pIegRvY3zJ62N6CCdCeQuEBzDnKJFYm+p5D4ZQeuAfLtGJOQw9DlyLR3NCuL50C3w+db8XImS+jVhZch7hR9hZIYRu2FDym8xx0qK7ppo95n2MSrqjzst7ntujbAJygYUeScwFAA0LIflOCgzQ2OgHtfLBVsIeAOwRNHdNk3TvCoAwuprQ9gCQOjchcJ5xqw0hKpUXwqfE3lYSz3GxlQBESWiNLCVxjpnNtz0YSCGEV39WMuDHZz6DAT8nbUVODwB2fOiRA1S5TUfvAcBOnrlbvKlJbKtclxywVYLJ883MZfTCeN+DAey1zYYpllOVlykM2AHx3369AFBB0qzD+M0ZwkuaVHPJ6r+55Q86vQB4FnIjRW0H3hrkejLA3n7wagHhL5g3oHsygBJ/ECGpARLV/YgJSiZz1eix0gPY9caghn5ApOGO9TQ4fgMmSm7WcIOB0cUDVqmd1xjYsoZOC6DUcQFL1fKXXaM61gbQAj4so80bLr3BgYGlPT7Wzte2Y7L+v3CKojHQL/FKAAAAAElFTkSuQmCC" media="screen"/>
+</head>
+<body>
+<h2>当前路径：{{path}}</h2>
+<table>
+    <tr>
+        <th>名称</th>
+        <th>大小</th>
+        <th>修改日期</th>
+    </tr>
+    {{#if hasParent}}
+    <tr>
+        <td>
+            <a class="icon{{#if isNotIE}} up{{/if}}" href="{{parent}}">Back to {{parent}}</a><br>
+        </td>
+    </tr>
+    {{/if}}
+    {{#each files}}
+    <tr>
+        <td><a class="icon {{this.type}}" href="{{this.path}}">{{this.name}}</a><br></td>
+        <td class="detailsColumn">{{this.size}}</td>
+        <script>
+            document.write('<td class="detailsColumn">' + new Date({{this.time}}).toLocaleString() + '</td>');
+        </script>
+    </tr>
+
+    {{/each}}
+</table>
+</body>
+</html>
