@@ -5,7 +5,7 @@ let express = require('express'),
     fs = require('fs');
 
 let argv = process.argv;
-let rootPath = '/srv/ftp/';
+let rootPath = './';
 if (argv.length > 2) {
     let path = argv[2];
     let rootExists = fs.existsSync(path);
