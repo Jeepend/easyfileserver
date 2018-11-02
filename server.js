@@ -19,7 +19,7 @@ app.engine('html', hbs.express4({
     extname: 'html'
 }));
 app.set('view engine', 'html');
-app.set('views', path.resolve('./'));
+app.set('views', path.resolve(__dirname));
 
 app.route('/*').get(renderIndex);
 app.listen(8080, '0.0.0.0', function () {
