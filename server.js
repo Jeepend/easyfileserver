@@ -5,12 +5,12 @@ let express = require('express'),
     fs = require('fs');
 
 let argv = process.argv;
-let rootPath = './';
+let rootPath = path.resolve('./');
 if (argv.length > 2) {
-    let path = argv[2];
-    let rootExists = fs.existsSync(path);
+    let p = argv[2];
+    let rootExists = fs.existsSync(p);
     if (rootExists) {
-        rootPath = path;
+        rootPath = path.resolve(p);
     }
 }
 
