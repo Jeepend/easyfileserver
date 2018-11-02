@@ -14,6 +14,27 @@ if (argv.length > 2) {
     }
 }
 
+let player = express();
+player.engine('html', hbs.express4({
+    extname: 'html'
+}));
+player.set('view engine', 'html');
+player.set('views', path.resolve(__dirname));
+
+player.route('/*').get(renderPlayerIndex);
+player.listen(8081, '0.0.0.0', function () {
+    console.log("start player successfully");
+});
+
+function renderPlayerIndex(req, res) {
+    let url = req.query.url;
+    if (url.startsWith('/')) {
+        url = url.substr(1)
+    }
+    url = 'http://' + req.hostname + ':8080/' + url;
+    res.render('video', {title: req.query.title, url: url});
+}
+
 let app = express();
 app.engine('html', hbs.express4({
     extname: 'html'
@@ -61,6 +82,10 @@ function renderIndex(req, res) {
                             let stat = fs.lstatSync(p);
                             let webPath = path +'/'+ file;
                             webPath = webPath.replace(/\/\//g, '/');
+                            if (file.endsWith('mp4')) {
+                                webPath = 'http://' + req.hostname + ':8081?url=' + webPath + '&title=' + file
+                            }
+
                             let size = stat.isFile() ? renderSize(stat.size) : '';
                             let type = "";
                             if (!isIE) {
