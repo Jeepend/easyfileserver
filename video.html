@@ -8,8 +8,47 @@
 </head>
 <body>
 
-<video src="{{url}}" controls="controls" height="100%" width="100%" autoplay="autoplay">
+<video id="video" src="{{url}}" controls="controls" height="100%" width="100%" autoplay="autoplay">
     your browser does not support the video tag
 </video>
+
+<script>
+    var video = document.getElementById("video");
+    var paused = true
+    video.addEventListener('play', function () {
+        paused = false;
+    });
+    video.addEventListener('pause', function () {
+        paused = true;
+    });
+    document.onkeydown = function (event) {
+        var keyCode = event.keyCode;
+        if (keyCode === 37 || keyCode === 39 || keyCode === 32) {
+            event.returnValue = false;
+            switch (keyCode) {
+                case 32:
+                    if (paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                    break;
+                case 37:
+                    var time = video.currentTime;
+                    time -= 5;
+                    time = time < 0 ? 0 : time;
+                    video.currentTime = time;
+                    break;
+                case 39:
+                    var time = video.currentTime;
+                    time += 5;
+                    time = time > video.duration ? video.duration : time
+                    video.currentTime = time
+                    break;
+            }
+        }
+
+    }
+</script>
 </body>
 </html>

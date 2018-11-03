@@ -57,7 +57,11 @@
     {{/if}}
     {{#each files}}
     <tr>
+        {{#if this.isFile}}
         <td><a class="icon {{this.type}}" href="{{this.path}}" target="_blank">{{this.name}}</a><br></td>
+        {{else}}
+        <td><a class="icon {{this.type}}" href="{{this.path}}">{{this.name}}</a><br></td>
+        {{/if}}
         <td class="detailsColumn">{{this.size}}</td>
         <script>
             document.write('<td class="detailsColumn">' + new Date({{this.time}}).toLocaleString() + '</td>');

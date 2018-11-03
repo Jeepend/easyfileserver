@@ -91,7 +91,7 @@ function renderIndex(req, res) {
                             if (!isIE) {
                                 type = stat.isFile() ? 'file' : 'dir';
                             }
-                            fileList.push({path:webPath, type:type, name: file, size: size, time: stat.ctime.getTime()});
+                            fileList.push({path:encodeURI(webPath), type:type, name: file, size: size, time: stat.ctime.getTime(), isFile: stat.isFile()});
                         } catch (err) {
                             console.log('err happen : ' + err);
                         }
