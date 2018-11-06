@@ -70,6 +70,7 @@ function renderIndex(req, res) {
         let stat = fs.lstatSync(realPath);
         if (stat.isFile()) {
             let name = path.substring(path.lastIndexOf('/') + 1, path.length);
+            name = name.replace(/,/g, '_')
             res.sendFile(realPath, {headers: {'Content-Disposition': "attachment;filename*=UTF-8''" + encodeURI(name)}})
         } else {
             fs.readdir(realPath, function (err, files) {
