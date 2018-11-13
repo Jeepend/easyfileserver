@@ -44,12 +44,14 @@
 <h2>Current path：{{path}}</h2>
 <table>
     <tr>
+        <th>Rate</th>
         <th>Name</th>
         <th>Size</th>
         <th>Last modify time</th>
     </tr>
     {{#if hasParent}}
     <tr>
+        <td></td>
         <td>
             <a class="icon{{#if isNotIE}} up{{/if}}" href="{{parent}}">Back to {{parent}}</a><br>
         </td>
@@ -57,6 +59,7 @@
     {{/if}}
     {{#each files}}
     <tr>
+        <td>{{this.rate}} %</td>
         {{#if this.isFile}}
         <td><a class="icon {{this.type}}" href="{{this.path}}" target="_blank">{{this.name}}</a><br></td>
         {{else}}
