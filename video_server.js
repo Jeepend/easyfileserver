@@ -52,12 +52,12 @@ var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database('video.db');
 
 function renderIndex(req, res) {
-    db.all('select page_url from video_info', (err, rows) => {
+    db.all('select * from video_info', (err, rows) => {
         const rateMap = {};
-        for (let row in rows) {
+        rows.forEach((row) => {
             const title = row.title;
             rateMap[title] = row.rate;
-        }
+        });
         realRender(req, res, rateMap)
     });
 }
@@ -118,7 +118,7 @@ function realRender(req, res, rateMap) {
                     index++;
                 });
                 fileList.sort((f1, f2) => {
-                    return f1.rate - f2.rate;
+                    return f2.rate - f1.rate;
                 })
                 res.render('main', {files: fileList, parent: parent, hasParent : hasParent, path: path, isNotIE: !isIE});
             });
