@@ -44,6 +44,7 @@
 <h2>Current path：{{path}}</h2>
 <table>
     <tr>
+        <th>Downloaded</th>
         <th>Rate</th>
         <th>Name</th>
         <th>Size</th>
@@ -59,6 +60,7 @@
     {{/if}}
     {{#each files}}
     <tr>
+        <td>{{this.downloaded}}</td>
         <td>{{this.rate}} %</td>
         {{#if this.isFile}}
         <td><a class="icon {{this.type}}" href="{{this.path}}" target="_blank">{{this.name}}</a><br></td>

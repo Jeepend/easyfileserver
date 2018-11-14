@@ -53,16 +53,16 @@ var db = new sqlite3.Database('video.db');
 
 function renderIndex(req, res) {
     db.all('select * from video_info', (err, rows) => {
-        const rateMap = {};
+        let videoMap = {};
         rows.forEach((row) => {
             const title = row.title;
-            rateMap[title] = row.rate;
+            videoMap[title] = { rate: row.rate, downloaded: row.downloaded};
         });
-        realRender(req, res, rateMap)
+        realRender(req, res, videoMap)
     });
 }
 
-function realRender(req, res, rateMap) {
+function realRender(req, res, videoMap) {
     let userAgent = req.headers["user-agent"];
     let isOpera = userAgent.indexOf("Opera") > -1;
     let isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera;
@@ -109,8 +109,9 @@ function realRender(req, res, rateMap) {
                                 type = stat.isFile() ? 'file' : 'dir';
                             }
                             const title = file.substr(0, file.length - 4)
+                            const video = videoMap[title]
                             fileList.push({path:encodeURI(webPath), type:type, name: file, size: size,
-                                time: stat.ctime.getTime(), isFile: stat.isFile(), rate: rateMap[title] || index});
+                                time: stat.ctime.getTime(), isFile: stat.isFile(), rate: video ? video.rate : index, downloaded: video : video.downloaded: true});
                         } catch (err) {
                             console.log('err happen : ' + err);
                         }
