@@ -111,7 +111,7 @@ function realRender(req, res, videoMap) {
                             const title = file.substr(0, file.length - 4)
                             const video = videoMap[title]
                             fileList.push({path:encodeURI(webPath), type:type, name: file, size: size,
-                                time: stat.ctime.getTime(), isFile: stat.isFile(), rate: video ? video.rate : index, downloaded: video : video.downloaded: true});
+                                time: stat.ctime.getTime(), isFile: stat.isFile(), rate: video ? video.rate : index, downloaded: video ? video.downloaded: true});
                         } catch (err) {
                             console.log('err happen : ' + err);
                         }
